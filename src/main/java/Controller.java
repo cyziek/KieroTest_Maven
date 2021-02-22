@@ -1,6 +1,7 @@
 import com.fasterxml.classmate.AnnotationConfiguration;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -43,6 +44,8 @@ public class Controller implements Initializable {
     private Label odp2Label;
     @FXML
     private Label odp3Label;
+    @FXML
+    private Button startButton;
     int selectedanswer = -1;
     String corrAnswer;
     String mediapath;
@@ -105,6 +108,7 @@ public class Controller implements Initializable {
         System.out.println("Media w miejscu odpalania: " + mediapath);
         MediaPlayerFactory factory = new MediaPlayerFactory();
         EmbeddedMediaPlayer mediaPlayer = mediaPlayerFactory.mediaPlayers().newEmbeddedMediaPlayer();
+        startButton.setDisable(true);
 
 
     }
@@ -156,6 +160,7 @@ public class Controller implements Initializable {
                 correctLabel().setStyle("-fx-background-color: #070");
             }
         }
+
     }
 
 
@@ -186,7 +191,12 @@ public class Controller implements Initializable {
     @FXML
     public void nextButton() {
         LoadQuestion();
-
+        selectedanswer = -1;
+        odp1Label.setStyle(null);
+        odp2Label.setStyle(null);
+        odp3Label.setStyle(null);
+        ImageView.setImage(null);
+        startButton.setDisable(true);
     }
 
 

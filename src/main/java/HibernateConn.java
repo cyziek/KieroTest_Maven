@@ -20,7 +20,7 @@ public class HibernateConn {
                 e.printStackTrace();
             }
         }
-        return null;
+        return sessionFactory;
     }
 
 }
