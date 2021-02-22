@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11.0.1"
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+    <children>
+        <AnchorPane prefHeight="741.0" prefWidth="1076.0">
+            <children>
+                <VBox layoutX="115.0" layoutY="444.0" prefHeight="278.0" prefWidth="778.0">
+                    <children>
+                        <Label fx:id="TrescPytaniaLabel" prefHeight="81.0" prefWidth="768.0" text="Treść Pytania"
+                               textAlignment="CENTER" wrapText="true">
+                            <font>
+                                <Font size="17.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="odp1Label" onMouseClicked="#Odp1Clicked" prefHeight="80.0" prefWidth="695.0"
+                               text="A: Odpowiedź nr 1" wrapText="true"/>
+                        <Label fx:id="odp2Label" onMouseClicked="#Odp2Clicked" prefHeight="80.0" prefWidth="695.0"
+                               text="B: Odpowiedź nr 2" wrapText="true"/>
+                        <Label fx:id="odp3Label" onMouseClicked="#Odp3Clicked" prefHeight="80.0" prefWidth="695.0"
+                               text="C: Odpowiedź nr 3" wrapText="true"/>
+                    </children>
+                </VBox>
+                <Button fx:id="startButton" layoutX="770.0" layoutY="202.0" mnemonicParsing="false"
+                        onAction="#MediaButton" prefHeight="57.0" prefWidth="179.0" text="START"/>
+                <Button fx:id="checkButton" layoutX="770.0" layoutY="295.0" mnemonicParsing="false"
+                        onAction="#checkButtonAction" prefHeight="48.0" prefWidth="179.0" text="Sprawdź"/>
+                <ImageView fx:id="ImageView" fitHeight="384.0" fitWidth="653.0" layoutX="63.0" layoutY="38.0"
+                           pickOnBounds="true" preserveRatio="true"/>
+                <Button layoutX="770.0" layoutY="378.0" mnemonicParsing="false" onAction="#nextButton" prefHeight="48.0"
+                        prefWidth="179.0" text="Następne &gt;"/>
+            </children>
+        </AnchorPane>
+    </children>
+    <columnConstraints>
+        <ColumnConstraints/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints/>
+    </rowConstraints>
+</GridPane>
