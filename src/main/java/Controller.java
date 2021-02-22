@@ -46,6 +46,8 @@ public class Controller implements Initializable {
     private Label odp3Label;
     @FXML
     private Button startButton;
+    @FXML
+     private Button checkButton;
     int selectedanswer = -1;
     String corrAnswer;
     String mediapath;
@@ -69,8 +71,8 @@ public class Controller implements Initializable {
             int randnumber = rand.nextInt(3000);
             List lista = session.createQuery("FROM Question WHERE id='" + randnumber + "'").list();
 
-            for (Iterator iterator1 = lista.iterator(); iterator1.hasNext(); ) {
-                Question question = (Question) iterator1.next();
+            for (Object o : lista) {
+                Question question = (Question) o;
                 PopulateLabel(question.getContent(), question.getAns1(), question.getAns2(), question.getAns3());
                 corrAnswer = question.getCorrect();
                 if (question.getMedia() == null) {
@@ -78,10 +80,13 @@ public class Controller implements Initializable {
                 } else {
                     mediapath = "D:\\Multimedia_KieroTest\\" + question.getMedia();
                 }
+                if (mediapath.contains(".jpg")) {
+                    MediaButton();
+                }
                 System.out.println("Content: " + question.getContent());
                 System.out.println("Odp1: " + question.getAns1());
                 System.out.println("Odp2: " + question.getAns2());
-                System.out.println("Odp3: + " + question.getAns3());
+                System.out.println("Odp3: " + question.getAns3());
                 System.out.println("Poprawna: " + question.getCorrect());
                 System.out.println("Mediapath: " + mediapath);
             }
@@ -96,18 +101,12 @@ public class Controller implements Initializable {
 
     @FXML
     private void MediaButton() {
-//        String path = new File(mediapath).getAbsolutePath();
-//        me = new Media(new File(path).toURI().toString());
-//        mp = new MediaPlayer(me);
-//    //    mediaView.setMediaPlayer(mp);
-//        mp.setAutoPlay(true);
         mediaPlayerFactory = new MediaPlayerFactory();
         player = mediaPlayerFactory.mediaPlayers().newEmbeddedMediaPlayer();
         player.videoSurface().set(videoSurfaceForImageView(ImageView));
         player.media().play(mediapath);
         System.out.println("Media w miejscu odpalania: " + mediapath);
-        MediaPlayerFactory factory = new MediaPlayerFactory();
-        EmbeddedMediaPlayer mediaPlayer = mediaPlayerFactory.mediaPlayers().newEmbeddedMediaPlayer();
+
         startButton.setDisable(true);
 
 
@@ -127,9 +126,7 @@ public class Controller implements Initializable {
     }
 
     public boolean AnswerChecker() {
-        if ((selectedanswer == 1 && corrAnswer.equals("A") || ((selectedanswer == 1) && corrAnswer.equals("T")) || (selectedanswer == 2 && corrAnswer.equals("B")) || (selectedanswer == 2 && corrAnswer.equals("N"))) || (selectedanswer == 3 && corrAnswer.equals("C"))) {
-            return true;
-        } else return false;
+        return (selectedanswer == 1 && corrAnswer.equals("A") || ((selectedanswer == 1) && corrAnswer.equals("T")) || (selectedanswer == 2 && corrAnswer.equals("B")) || (selectedanswer == 2 && corrAnswer.equals("N"))) || (selectedanswer == 3 && corrAnswer.equals("C"));
     }
 
     public Label correctLabel() {
@@ -170,6 +167,7 @@ public class Controller implements Initializable {
         odp2Label.setStyle(null);
         odp3Label.setStyle(null);
         selectedanswer = 1;
+        checkButton.setDisable(false);
     }
 
     @FXML
@@ -178,6 +176,7 @@ public class Controller implements Initializable {
         odp2Label.setStyle("-fx-background-color: #a1a1a1");
         odp1Label.setStyle(null);
         odp3Label.setStyle(null);
+        checkButton.setDisable(false);
     }
 
     @FXML
@@ -186,6 +185,7 @@ public class Controller implements Initializable {
         odp3Label.setStyle("-fx-background-color: #a1a1a1");
         odp1Label.setStyle(null);
         odp2Label.setStyle(null);
+        checkButton.setDisable(false);
     }
 
     @FXML
@@ -196,7 +196,12 @@ public class Controller implements Initializable {
         odp2Label.setStyle(null);
         odp3Label.setStyle(null);
         ImageView.setImage(null);
-        startButton.setDisable(true);
+        startButton.setDisable(false);
+        checkButton.setDisable(true);
+        odp3Label.setVisible(true);
+        odp3Label.setText(null);
+        mediaPlayerFactory=null;
+        player=null;
     }
 
 
